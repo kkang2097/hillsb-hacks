@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import UploadBar from "./components/UploadBar";
-import LogView from "./components/LogView"; // Import LogView
+import { Accordion, AccordionItem } from "./components/Accordion";
+import Settings from "./components/Settings"; // Import the Settings component
 
 export default function Dashboard() {
   return (
@@ -19,12 +20,14 @@ export default function Dashboard() {
       </header>
 
       <div className="main-content">
-        <div className="upload-container">
-          <UploadBar />
-        </div>
-        <div className="log-container">
-          <LogView />
-        </div>
+        <Accordion>
+          <AccordionItem title="Upload Image">
+            <UploadBar />
+          </AccordionItem>
+          <AccordionItem title="Choose Settings">
+            <Settings />
+          </AccordionItem>
+        </Accordion>
       </div>
     </div>
   );

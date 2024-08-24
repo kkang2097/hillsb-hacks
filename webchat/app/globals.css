@@ -17,8 +17,8 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: #5044cf; /* Hazel color */
+  color: black; /* Text color set to black */
+  background-color: #f8f8f8; /* Off-white color */
 }
 
 @layer utilities {
@@ -105,28 +105,25 @@ body {
 .upload-bar {
   position: relative; /* Change to relative to keep it inside the dashboard */
   margin-top: 20px; /* Add margin to separate from the header */
-  width: 100%; /* Make it full width */
-  text-align: center; /* Center text inside the upload bar */
+  width: auto; /* Change to auto to fit content */
+  text-align: left; /* Align text to the left */
   background-color: rgba(255, 255, 255, 0.9); /* Light background */
   border-radius: 0.5rem; /* Rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: none; /* Remove shadow to blend in */
   padding: 16px; /* Padding for inner spacing */
 }
 
 .upload-bar input {
-  position: relative;
-  width: 75%; /* Input width */
-  padding: 10px; /* Padding for input */
-  border: 1px solid #ccc; /* Light border */
-  border-radius: 0.25rem; /* Rounded corners */
-  margin-right: 8px; /* Space between input and button */
-  font-size: 1rem; /* Font size */
-} 
+  position: absolute; /* Position off-screen */
+  opacity: 0; /* Hide the default text */
+  width: 100%; /* Ensure it covers the area */
+  height: 100%; /* Ensure it covers the area */
+  cursor: pointer; /* Change cursor to pointer */
+}
 
 .upload-bar button {
   padding: 10px 20px; /* Padding for button */
-  background-color: #c928e9; /* Button color */
-  color: white; /* Text color */
+  background-color: #bfbbc0; /* Button color */
   border: none; /* Remove border */
   border-radius: 0.25rem; /* Rounded corners */
   cursor: pointer; /* Pointer cursor */
@@ -134,37 +131,66 @@ body {
 }
 
 .upload-bar button:hover {
-  background-color: #83279f; /* Darker shade on hover */
-}
-
-.log-view {
-  width: 50%;
-  margin-top: 20px; /* Add margin to separate from the UploadBar */
-  padding: 16px;
-  border: 1px solid #ccc; /* Light border */
-  border-radius: 0.5rem;
-  background-color: #1e1e1e; /* Dark background for terminal */
-  color: #00ff00; /* Green text for terminal */
-  font-family: 'Courier New', Courier, monospace; /* Monospace font */
-  overflow-y: auto; /* Allow scrolling if logs exceed height */
-  max-height: 400px; /* Set a max height for the log view */
-}
-
-.log-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.log-item {
-  padding: 4px 0;
-  border-bottom: 1px solid #333; /* Darker divider */
-}
-
-.log-item:last-child {
-  border-bottom: none; /* Remove border for last item */
+  background-color: #82329d !important; /* Force the hover color */
 }
 
 .main-content {
   width: 100%; /* Ensure main-content takes full width */
   margin-top: 20px; /* Add margin to separate from the header */
+}
+
+.accordion {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #ccc;
+}
+
+.accordion-title {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f7f7f7;
+}
+
+.accordion-content {
+    padding: 10px;
+    background-color: #fff;
+}
+
+.settings-ui {
+  padding: 16px; /* Padding for inner spacing */
+  background-color: #ffffff; /* White background */
+  border-radius: 0; /* Remove rounded corners to blend with Accordion */
+  box-shadow: none; /* Remove shadow for seamless blending */
+  border: none; /* Ensure no border */
+}
+
+.settings-ui h2 {
+  font-size: 1.5rem; /* Title font size */
+  font-weight: 600; /* Bold title */
+  margin-bottom: 1rem; /* Space below title */
+}
+
+.settings-ui label {
+  display: block; /* Block display for labels */
+  margin-bottom: 0.5rem; /* Space below labels */
+}
+
+.settings-ui input[type="range"] {
+  width: 100%; /* Full width for sliders */
+  border: none; /* Remove border from range input */
+}
+
+.settings-ui select {
+  width: 100%; /* Full width for dropdowns */
+  border: none; /* Remove border for dropdowns */
+  border-radius: 0.25rem; /* Rounded corners */
+  padding: 0.5rem; /* Padding for dropdowns */
+  margin-top: 0.25rem; /* Space above dropdowns */
+}
+
+.settings-ui .mb-4 {
+  margin-bottom: 1rem; /* Space between form elements */
 }
