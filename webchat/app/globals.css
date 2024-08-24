@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 139, 69, 19;
+    --background-end-rgb: 139, 69, 19;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: #5044cf; /* Hazel color */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Change to flex-start to position items at the top */
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.header {
+  width: 100%;
+  max-width: 5xl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Mono', monospace;
+  font-size: 0.875rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav-link {
+  padding: 0 1rem;
+}
+
+.image-container {
+  position: relative;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-logo {
+  position: relative;
+}
+
+.sections {
+  margin-bottom: 32px;
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.section {
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.section:hover {
+  border-color: gray;
+  background-color: #f7fafc; /* Light gray */
+}
+
+.section-title {
+  margin-bottom: 0.75rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.section-description {
+  margin: 0;
+  max-width: 30ch;
+  font-size: 0.875rem;
+  opacity: 0.5;
+}
+
+.upload-bar {
+  position: relative; /* Change to relative to keep it inside the dashboard */
+  margin-top: 20px; /* Add margin to separate from the header */
+  width: 100%; /* Make it full width */
+  text-align: center; /* Center text inside the upload bar */
+  background-color: rgba(255, 255, 255, 0.9); /* Light background */
+  border-radius: 0.5rem; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 16px; /* Padding for inner spacing */
+}
+
+.upload-bar input {
+  position: relative;
+  width: 75%; /* Input width */
+  padding: 10px; /* Padding for input */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 0.25rem; /* Rounded corners */
+  margin-right: 8px; /* Space between input and button */
+  font-size: 1rem; /* Font size */
+} 
+
+.upload-bar button {
+  padding: 10px 20px; /* Padding for button */
+  background-color: #c928e9; /* Button color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 0.25rem; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.upload-bar button:hover {
+  background-color: #83279f; /* Darker shade on hover */
+}
+
+.log-view {
+  width: 50%;
+  margin-top: 20px; /* Add margin to separate from the UploadBar */
+  padding: 16px;
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 0.5rem;
+  background-color: #1e1e1e; /* Dark background for terminal */
+  color: #00ff00; /* Green text for terminal */
+  font-family: 'Courier New', Courier, monospace; /* Monospace font */
+  overflow-y: auto; /* Allow scrolling if logs exceed height */
+  max-height: 400px; /* Set a max height for the log view */
+}
+
+.log-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.log-item {
+  padding: 4px 0;
+  border-bottom: 1px solid #333; /* Darker divider */
+}
+
+.log-item:last-child {
+  border-bottom: none; /* Remove border for last item */
+}
+
+.main-content {
+  width: 100%; /* Ensure main-content takes full width */
+  margin-top: 20px; /* Add margin to separate from the header */
+}
