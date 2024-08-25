@@ -1,20 +1,15 @@
 import React from 'react';
 
-interface DropdownProps {
-    value: string;
-    onChange: (value: string) => void;
-    options: string[];
-}
-
-const Dropdown: React.FC<DropdownProps> = ({ value, onChange, options }) => {
+const Dropdown: React.FC<{ attribute: string; value: string; onChange: (value: string) => void; options: string[]; placeholder?: string }> = ({ attribute, value, onChange, options, placeholder }) => {
     return (
-        <label className="block mb-2">
-            Dropdown:
+        <div className="dropdown-container">
+        <label>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full border rounded p-2"
+                className="dropdown"
             >
+                <option value="" disabled>{placeholder}</option>
                 {options.map((option) => (
                     <option key={option} value={option}>
                         {option}
@@ -22,6 +17,7 @@ const Dropdown: React.FC<DropdownProps> = ({ value, onChange, options }) => {
                 ))}
             </select>
         </label>
+        </div>
     );
 };
 

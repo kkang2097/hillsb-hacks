@@ -23,6 +23,10 @@ span {
   margin-bottom: 0; /* Remove bottom margin */
 }
 
+p {
+  text-align: center;
+}
+
 textarea {
   margin-top: 10px; /* Add margin to the top */
   margin-bottom: 20px; /* Add margin to the bottom */
@@ -164,45 +168,6 @@ body {
   background-color: #82329d !important; /* Force the hover color */
 }
 
-.main-content {
-  /* Remove all styles for main-content */
-}
-
-.settings-ui {
-  padding: 16px; /* Padding for inner spacing */
-  background-color: #ffffff; /* White background */
-  border-radius: 0; /* Remove rounded corners to blend with Accordion */
-  box-shadow: none; /* Remove shadow for seamless blending */
-  border: none; /* Ensure no border */
-}
-
-.settings-ui h2 {
-  font-size: 1.5rem; /* Title font size */
-  font-weight: 600; /* Bold title */
-  margin-bottom: 1rem; /* Space below title */
-}
-
-.settings-ui label {
-  display: block; /* Block display for labels */
-  margin-bottom: 0.5rem; /* Space below labels */
-}
-
-.settings-ui input[type="range"] {
-  width: 100%; /* Full width for sliders */
-  border: none; /* Remove border from range input */
-}
-
-.settings-ui select {
-  width: 100%; /* Full width for dropdowns */
-  border: none; /* Remove border for dropdowns */
-  border-radius: 0.25rem; /* Rounded corners */
-  padding: 0.5rem; /* Padding for dropdowns */
-  margin-top: 0.25rem; /* Space above dropdowns */
-}
-
-.settings-ui .mb-4 {
-  margin-bottom: 1rem; /* Space between form elements */
-}
 
 .view-one {
   height: 100%; /* Set height to 100% */
@@ -255,4 +220,27 @@ body {
 .upload-label {
     position: relative; /* Ensure the label is positioned relative */
     display: inline-block; /* Ensure it only takes the necessary width */
+}
+
+.dropdown-container {
+    background-color: #ffffff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 10px; /* Padding around the dropdown */
+    margin-bottom: 16px; /* Space between dropdowns */
+}
+
+.dropdown {
+    width: 100%; /* Full width */
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+    padding: 10px; /* Padding inside the dropdown */
+    border-radius: 4px; /* Slightly rounded corners */
+    background-color: #f8f8f8; /* Light gray background */
+    color: #414253; /* Text color */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.dropdown:hover {
+    background-color: #eaeaea; /* Darker gray on hover */
 }

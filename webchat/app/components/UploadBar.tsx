@@ -34,7 +34,7 @@ const UploadBar: React.FC<UploadBarProps> = ({ file, setFile }) => {
     return (
         <div>
             <p>
-                <span className="font-bold text-lg">Step 2:</span> Let's set up the vibes (colors, items, etc)
+                <span className="font-bold text-lg">Step 2:</span> Let's see what we're working with
             </p>
             <form className="upload-bar" onSubmit={handleSubmit}>
                 <label className="upload-label">
