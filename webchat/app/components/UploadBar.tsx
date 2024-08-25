@@ -25,14 +25,15 @@ const UploadBar: React.FC<UploadBarProps> = ({ file, setFile }) => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+
+        //TODO: Add the API request here
         await submitImage(file);
         setFile(null); // Clear the input after submission
     };
 
     return (
         <div>
-
-<p>
+            <p>
                 <span className="font-bold text-lg">Step 2:</span> Let's set up the vibes (colors, items, etc)
             </p>
             <form className="upload-bar" onSubmit={handleSubmit}>
@@ -40,8 +41,9 @@ const UploadBar: React.FC<UploadBarProps> = ({ file, setFile }) => {
                     <input 
                         type="file" 
                         onChange={handleInputChange}
+                        className="absolute inset-0 opacity-0 cursor-pointer" // Cover the entire upload-bar
                     />
-                    <span>{file?.name || 'No file chosen'}</span>
+                    <span className="text-[#414253]">{file?.name || 'No file chosen'}</span>
                 </label>    
             </form>
             <p>

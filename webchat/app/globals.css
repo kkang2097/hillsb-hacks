@@ -143,10 +143,11 @@ body {
 }
 
 .upload-bar input {
-  position: absolute; /* Position off-screen */
-  opacity: 0; /* Hide the default text */
-  width: 100%; /* Ensure it covers the area */
-  height: 100%; /* Ensure it covers the area */
+  position: absolute; /* Position the input absolutely */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Cover the full width */
+  height: 100%; /* Cover the full height */
   cursor: pointer; /* Change cursor to pointer */
 }
 
@@ -249,4 +250,9 @@ body {
     width: auto;
     height: auto;
     margin-top: 10px; /* Optional: Add some space above the preview */
+}
+
+.upload-label {
+    position: relative; /* Ensure the label is positioned relative */
+    display: inline-block; /* Ensure it only takes the necessary width */
 }
