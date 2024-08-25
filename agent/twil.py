@@ -1,15 +1,18 @@
 import base64
 import os
+import json
 
 from devtools import pprint
 from flask import Flask, request
 from flask_pydantic import validate
 from openai import OpenAI
 from twilio.twiml.messaging_response import MessagingResponse
+from groq import Groq
 
 from classes import ShoppingList, ShoppingListChanged, InitBodyModel
 
 client = OpenAI()
+gclient = Groq()
 
 
 def shopping_list_system_message(shopping_list: ShoppingList):
@@ -30,6 +33,14 @@ def shopping_list_changed_system_message():
     return {
         "role": "system",
         "content": "Has the shopping list changed? Return a JSON.",
+    }
+
+
+def shopping_list_changed_groq_message():
+    return {
+        "role": "user",
+        "content": """Has the shopping list changed? The format of the output should not be verbose - just output JSON in the format of
+        {"changed": true} or {"changed": false}""",
     }
 
 
@@ -71,6 +82,19 @@ def has_shopping_list_changed() -> bool:
         response_format=ShoppingListChanged,
     )
     return response.choices[0].message.parsed.changed
+
+
+def groq_has_shopping_list_changed() -> bool:
+    global current_shopping_list
+    response = gclient.chat.completions.create(
+        model="llama3-70b-8192",
+        messages=[shopping_list_system_message(current_shopping_list)]
+        + current_chat_log
+        + [shopping_list_changed_groq_message()],
+        response_format={"type": "json_object"},
+    )
+    res = json.loads(response.choices[0].message.content)
+    return res.get("changed", False) == True
 
 
 def get_changed_shopping_list() -> ShoppingList:
@@ -161,7 +185,7 @@ def bot():
             content.append({"type": "image_url", "image_url": {"url": url}})
         current_chat_log.append({"role": "user", "content": content})
 
-    if has_shopping_list_changed():
+    if groq_has_shopping_list_changed():
         current_shopping_list = get_changed_shopping_list()
         print("Shopping list has changed")
         pprint(current_shopping_list)
