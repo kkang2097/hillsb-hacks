@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Slider from './Slider';
 import UploadBar from './UploadBar';
 import Dropdown from './Dropdown';
+import { submitPrefs } from '../utils/submitPrefs'; // Import the submitPrefs function
 
-const ViewOne: React.FC = () => {
+const ViewOne: React.FC = (shoppingList: ShoppingList, setShoppingList: (shoppingList: ShoppingList) => void) => {
     const [isToggled, setIsToggled] = useState(false);
     const [textareaValue, setTextareaValue] = useState('');
     const [file, setFile] = useState<File | null>(null);
-    const [color, setColor] = useState(''); // Updated to empty string
-    const [style, setStyle] = useState(''); // New state for style
+    const [color, setColor] = useState('');
+    const [style, setStyle] = useState('');
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -34,7 +35,7 @@ const ViewOne: React.FC = () => {
         if (typeof window !== 'undefined') {
             localStorage.setItem('isToggled', JSON.stringify(isToggled));
             localStorage.setItem('textareaValue', textareaValue);
-            localStorage.setItem('color', color); // Save color to localStorage
+            localStorage.setItem('color', color);
             if (file) {
                 const reader = new FileReader();
                 reader.onloadend = () => {
@@ -47,10 +48,20 @@ const ViewOne: React.FC = () => {
                 localStorage.removeItem('fileName');
             }
         }
-    }, [isToggled, textareaValue, file, color, style]); // Add style to dependencies
+    }, [isToggled, textareaValue, file, color, style]);
 
     const toggleView = () => {
         setIsToggled(!isToggled);
+    };
+
+    const handleSubmit = (e) => {
+        console.log('handleSubmit called');
+        if (file) {
+            console.log('file found');
+           submitPrefs(color, style, file, setShoppingList);
+        } else {
+            console.error('No file selected for submission.');
+        }
     };
 
     return (
@@ -73,7 +84,7 @@ const ViewOne: React.FC = () => {
                 options={["Casual", "Formal", "Sporty"]} 
                 placeholder="Select a style" 
             />
-            <UploadBar file={file} setFile={setFile} />
+            <UploadBar file={file} setFile={setFile} handleSubmit={handleSubmit} /> {/* Pass the handleSubmit function */}
         </div>
     );
 };

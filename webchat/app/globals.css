@@ -238,7 +238,7 @@ body {
     border-radius: 4px; /* Slightly rounded corners */
     background-color: #f8f8f8; /* Light gray background */
     color: #414253; /* Text color */
-    transition: background-color 0.3s; /* Smooth transition for background color */
+    transition: background-color 0.5s; /* Smooth transition for background color */
 }
 
 .dropdown:hover {
