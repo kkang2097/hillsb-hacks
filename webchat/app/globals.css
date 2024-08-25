@@ -16,6 +16,23 @@
   }
 }
 
+span {
+  display: inline-block; /* Ensure span takes only the necessary width */
+  margin-right: 10px; /* Add some space to the right of the span */
+  margin-top: 0; /* Remove top margin */
+  margin-bottom: 0; /* Remove bottom margin */
+}
+
+textarea {
+  margin-top: 10px; /* Add margin to the top */
+  margin-bottom: 20px; /* Add margin to the bottom */
+  padding: 10px; /* Add padding inside the textarea */
+  border-radius: 8px; /* Rounded corners */
+  border: 1px solid #ccc; /* Border color */
+  width: 37%; /* Full width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
 body {
   color: black; /* Text color set to black */
   background-color: #f8f8f8; /* Off-white color */
@@ -25,6 +42,14 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.bg-view-one {
+    background-color: #414253; /* Change to your desired color */
+}
+
+.bg-view-two {
+    background-color: #f3f4f8; /* Change to your desired color */
 }
 
 .dashboard {
@@ -85,7 +110,7 @@ body {
 }
 
 .section:hover {
-  border-color: gray;
+  border-color: #414253;
   background-color: #f7fafc; /* Light gray */
 }
 
@@ -103,14 +128,18 @@ body {
 }
 
 .upload-bar {
-  position: relative; /* Change to relative to keep it inside the dashboard */
-  margin-top: 20px; /* Add margin to separate from the header */
-  width: auto; /* Change to auto to fit content */
-  text-align: left; /* Align text to the left */
-  background-color: rgba(255, 255, 255, 0.9); /* Light background */
-  border-radius: 0.5rem; /* Rounded corners */
-  box-shadow: none; /* Remove shadow to blend in */
-  padding: 16px; /* Padding for inner spacing */
+  border: 2px dashed #ccc; /* Dashed border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding inside the box */
+  text-align: center; /* Center the content */
+  background-color: white; /* Background color */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+  margin-top: 20px; /* Add margin to the top */
+  margin-bottom: 20px; /* Add margin to the bottom */
+}
+
+.upload-bar:hover {
+  border-color: #888; /* Change border color on hover */
 }
 
 .upload-bar input {
@@ -135,28 +164,7 @@ body {
 }
 
 .main-content {
-  width: 100%; /* Ensure main-content takes full width */
-  margin-top: 20px; /* Add margin to separate from the header */
-}
-
-.accordion {
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-}
-
-.accordion-item {
-    border-bottom: 1px solid #ccc;
-}
-
-.accordion-title {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #f7f7f7;
-}
-
-.accordion-content {
-    padding: 10px;
-    background-color: #fff;
+  /* Remove all styles for main-content */
 }
 
 .settings-ui {
@@ -193,4 +201,52 @@ body {
 
 .settings-ui .mb-4 {
   margin-bottom: 1rem; /* Space between form elements */
+}
+
+.view-one {
+  height: 100%; /* Set height to 100% */
+  margin: auto; /* Center the component */
+  background-color: #414253; /* Change background color to green */
+  color: #f3f4f8; 
+  transition: width 0.3s; /* Smooth transition for width */
+  width: 10%; /* Default width */
+}
+
+.view-one.toggled {
+  width: 100%; /* Width when toggled */
+}
+
+.view-two {
+  width: 10%;
+  height: 100%; /* Set height to 100% */
+  background-color: #f3f4f8; /* Background for ViewTwo (blue-500) */
+  transition: width 0.3s; /* Smooth transition for width */
+}
+
+.view-two.toggled {
+  width: 100%; /* Width when ViewTwo is active */
+}
+
+.view-toggle {
+  height: 100%;
+  width: 10%; /* Adjusted to match the original w-1/20 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.toggle-button {
+  height: 100%;
+  width: 5%; /* Set button width to 5% */
+  cursor: pointer; /* Change cursor to pointer */
+  background-color: transparent; /* Use transparent to inherit background color from parent */
+}
+
+.image-preview {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    margin-top: 10px; /* Optional: Add some space above the preview */
 }
