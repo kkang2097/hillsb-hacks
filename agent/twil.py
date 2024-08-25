@@ -7,7 +7,7 @@ from flask_pydantic import validate
 from openai import OpenAI
 from twilio.twiml.messaging_response import MessagingResponse
 
-from classes import ShoppingList, ShoppingListChanged
+from classes import ShoppingList, ShoppingListChanged, InitBodyModel
 
 client = OpenAI()
 
@@ -43,13 +43,15 @@ def askgpt(chat_log):
 
 
 desired_style = "mid-century modern"
+desired_colors = "white and black"
 
-current_shopping_list = ShoppingList(
-    items=[
-        {"name": "sofa", "attributes": "white color", "purchased": False},
-        {"name": "chair", "attributes": "black color", "purchased": False},
-    ]
-)
+current_shopping_list = None
+# current_shopping_list = ShoppingList(
+#     items=[
+#         {"name": "sofa", "attributes": "white color", "purchased": False},
+#         {"name": "chair", "attributes": "black color", "purchased": False},
+#     ]
+# )
 
 current_chat_log = [
     {
@@ -86,16 +88,25 @@ def get_changed_shopping_list() -> ShoppingList:
 app = Flask(__name__)
 
 
-@app.route("/init", methods={"GET"})
-def init():
+@app.route("/init", methods={"GET", "POST"})
+@validate()
+def init(body: InitBodyModel):
     global current_shopping_list
     global current_chat_log
     global desired_style
+    global desired_colors
 
-    # open room.jpg and base64 encode it
-    encoded_string = None
-    with open("room.jpg", "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read()).decode("utf-8")
+    if body.desired_style is not None:
+        desired_style = body.desired_style
+    if body.desired_colors is not None:
+        desired_colors = body.desired_colors
+    encoded_string = ""
+    if body.encoded_image is not None:
+        encoded_string = body.encoded_image
+    else:
+        # open room.jpg and base64 encode it
+        with open("room.jpg", "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read()).decode("utf-8")
 
     response = client.beta.chat.completions.parse(
         model="gpt-4o-2024-08-06",
@@ -105,7 +116,8 @@ def init():
                 "content": [
                     {
                         "type": "text",
-                        "text": "This is my room right now. I want to redo and change my entire room. My desired style is {desired_style}. "
+                        "text": "This is my room right now. I want to redo and change my entire room. "
+                        f"My desired style is {desired_style} and the colors I like the best are {desired_colors}. "
                         "Create a shopping list of 5 items to purchase in JSON.",
                     },
                     {
@@ -124,7 +136,7 @@ def init():
     print("Initial shopping list")
     pprint(current_shopping_list)
 
-    return "success"
+    return current_shopping_list
 
 
 @app.route("/bot", methods=["POST"])
@@ -169,13 +181,3 @@ def bot():
 def shopping_list():
     global current_shopping_list
     return current_shopping_list
-
-
-@app.route("/add-item", methods=["GET"])
-@validate()
-def add_item():
-    global current_shopping_list
-    current_shopping_list.items.append(
-        {"name": "table", "attributes": "brown color", "purchased": False}
-    )
-    return "success"
