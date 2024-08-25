@@ -16,15 +16,40 @@
   }
 }
 
+span {
+  display: inline-block; /* Ensure span takes only the necessary width */
+  margin-right: 10px; /* Add some space to the right of the span */
+  margin-top: 0; /* Remove top margin */
+  margin-bottom: 0; /* Remove bottom margin */
+}
+
+textarea {
+  margin-top: 10px; /* Add margin to the top */
+  margin-bottom: 20px; /* Add margin to the bottom */
+  padding: 10px; /* Add padding inside the textarea */
+  border-radius: 8px; /* Rounded corners */
+  border: 1px solid #ccc; /* Border color */
+  width: 37%; /* Full width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: #5044cf; /* Hazel color */
+  color: black; /* Text color set to black */
+  background-color: #f8f8f8; /* Off-white color */
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.bg-view-one {
+    background-color: #414253; /* Change to your desired color */
+}
+
+.bg-view-two {
+    background-color: #f3f4f8; /* Change to your desired color */
 }
 
 .dashboard {
@@ -85,7 +110,7 @@ body {
 }
 
 .section:hover {
-  border-color: gray;
+  border-color: #414253;
   background-color: #f7fafc; /* Light gray */
 }
 
@@ -103,30 +128,32 @@ body {
 }
 
 .upload-bar {
-  position: relative; /* Change to relative to keep it inside the dashboard */
-  margin-top: 20px; /* Add margin to separate from the header */
-  width: 100%; /* Make it full width */
-  text-align: center; /* Center text inside the upload bar */
-  background-color: rgba(255, 255, 255, 0.9); /* Light background */
-  border-radius: 0.5rem; /* Rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  padding: 16px; /* Padding for inner spacing */
+  border: 2px dashed #ccc; /* Dashed border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding inside the box */
+  text-align: center; /* Center the content */
+  background-color: white; /* Background color */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+  margin-top: 20px; /* Add margin to the top */
+  margin-bottom: 20px; /* Add margin to the bottom */
+}
+
+.upload-bar:hover {
+  border-color: #888; /* Change border color on hover */
 }
 
 .upload-bar input {
-  position: relative;
-  width: 75%; /* Input width */
-  padding: 10px; /* Padding for input */
-  border: 1px solid #ccc; /* Light border */
-  border-radius: 0.25rem; /* Rounded corners */
-  margin-right: 8px; /* Space between input and button */
-  font-size: 1rem; /* Font size */
-} 
+  position: absolute; /* Position the input absolutely */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Cover the full width */
+  height: 100%; /* Cover the full height */
+  cursor: pointer; /* Change cursor to pointer */
+}
 
 .upload-bar button {
   padding: 10px 20px; /* Padding for button */
-  background-color: #c928e9; /* Button color */
-  color: white; /* Text color */
+  background-color: #bfbbc0; /* Button color */
   border: none; /* Remove border */
   border-radius: 0.25rem; /* Rounded corners */
   cursor: pointer; /* Pointer cursor */
@@ -134,37 +161,98 @@ body {
 }
 
 .upload-bar button:hover {
-  background-color: #83279f; /* Darker shade on hover */
-}
-
-.log-view {
-  width: 50%;
-  margin-top: 20px; /* Add margin to separate from the UploadBar */
-  padding: 16px;
-  border: 1px solid #ccc; /* Light border */
-  border-radius: 0.5rem;
-  background-color: #1e1e1e; /* Dark background for terminal */
-  color: #00ff00; /* Green text for terminal */
-  font-family: 'Courier New', Courier, monospace; /* Monospace font */
-  overflow-y: auto; /* Allow scrolling if logs exceed height */
-  max-height: 400px; /* Set a max height for the log view */
-}
-
-.log-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.log-item {
-  padding: 4px 0;
-  border-bottom: 1px solid #333; /* Darker divider */
-}
-
-.log-item:last-child {
-  border-bottom: none; /* Remove border for last item */
+  background-color: #82329d !important; /* Force the hover color */
 }
 
 .main-content {
-  width: 100%; /* Ensure main-content takes full width */
-  margin-top: 20px; /* Add margin to separate from the header */
+  /* Remove all styles for main-content */
+}
+
+.settings-ui {
+  padding: 16px; /* Padding for inner spacing */
+  background-color: #ffffff; /* White background */
+  border-radius: 0; /* Remove rounded corners to blend with Accordion */
+  box-shadow: none; /* Remove shadow for seamless blending */
+  border: none; /* Ensure no border */
+}
+
+.settings-ui h2 {
+  font-size: 1.5rem; /* Title font size */
+  font-weight: 600; /* Bold title */
+  margin-bottom: 1rem; /* Space below title */
+}
+
+.settings-ui label {
+  display: block; /* Block display for labels */
+  margin-bottom: 0.5rem; /* Space below labels */
+}
+
+.settings-ui input[type="range"] {
+  width: 100%; /* Full width for sliders */
+  border: none; /* Remove border from range input */
+}
+
+.settings-ui select {
+  width: 100%; /* Full width for dropdowns */
+  border: none; /* Remove border for dropdowns */
+  border-radius: 0.25rem; /* Rounded corners */
+  padding: 0.5rem; /* Padding for dropdowns */
+  margin-top: 0.25rem; /* Space above dropdowns */
+}
+
+.settings-ui .mb-4 {
+  margin-bottom: 1rem; /* Space between form elements */
+}
+
+.view-one {
+  height: 100%; /* Set height to 100% */
+  margin: auto; /* Center the component */
+  background-color: #414253; /* Change background color to green */
+  color: #f3f4f8; 
+  transition: width 0.3s; /* Smooth transition for width */
+  width: 10%; /* Default width */
+}
+
+.view-one.toggled {
+  width: 100%; /* Width when toggled */
+}
+
+.view-two {
+  width: 10%;
+  height: 100%; /* Set height to 100% */
+  background-color: #f3f4f8; /* Background for ViewTwo (blue-500) */
+  transition: width 0.3s; /* Smooth transition for width */
+}
+
+.view-two.toggled {
+  width: 100%; /* Width when ViewTwo is active */
+}
+
+.view-toggle {
+  height: 100%;
+  width: 10%; /* Adjusted to match the original w-1/20 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.toggle-button {
+  height: 100%;
+  width: 5%; /* Set button width to 5% */
+  cursor: pointer; /* Change cursor to pointer */
+  background-color: transparent; /* Use transparent to inherit background color from parent */
+}
+
+.image-preview {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    margin-top: 10px; /* Optional: Add some space above the preview */
+}
+
+.upload-label {
+    position: relative; /* Ensure the label is positioned relative */
+    display: inline-block; /* Ensure it only takes the necessary width */
 }
