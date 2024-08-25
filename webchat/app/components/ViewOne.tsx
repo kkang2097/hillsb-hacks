@@ -7,6 +7,8 @@ const ViewOne: React.FC = () => {
     const [isToggled, setIsToggled] = useState(false);
     const [textareaValue, setTextareaValue] = useState('');
     const [file, setFile] = useState<File | null>(null);
+    const [color, setColor] = useState(''); // Updated to empty string
+    const [style, setStyle] = useState(''); // New state for style
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -32,6 +34,7 @@ const ViewOne: React.FC = () => {
         if (typeof window !== 'undefined') {
             localStorage.setItem('isToggled', JSON.stringify(isToggled));
             localStorage.setItem('textareaValue', textareaValue);
+            localStorage.setItem('color', color); // Save color to localStorage
             if (file) {
                 const reader = new FileReader();
                 reader.onloadend = () => {
@@ -44,26 +47,31 @@ const ViewOne: React.FC = () => {
                 localStorage.removeItem('fileName');
             }
         }
-    }, [isToggled, textareaValue, file]);
+    }, [isToggled, textareaValue, file, color, style]); // Add style to dependencies
 
     const toggleView = () => {
         setIsToggled(!isToggled);
     };
 
-    const dropdownOptions = ['Option 1', 'Option 2', 'Option 3'];
-
     return (
-        <div className="flex flex-col items-center justify-start h-full">
+        <div className="flex-col items-center justify-start h-full">
             <h1>View One</h1>
             <p>
-                <span className="font-bold text-lg">Step 1:</span> Let's set up the vibes (colors, items, etc)
+                <span className="font-bold text-lg">Step 1:</span> Let's set up the vibes
             </p>
-            <textarea
-                value={textareaValue}
-                onChange={(e) => setTextareaValue(e.target.value)}
-                placeholder="Enter text here"
-                rows={4}
-                cols={50}
+            <Dropdown 
+                attribute="Color" 
+                value={color} 
+                onChange={setColor} 
+                options={["Red", "Blue", "Green"]} 
+                placeholder="Select a color" 
+            />
+            <Dropdown 
+                attribute="Style" 
+                value={style} 
+                onChange={setStyle} 
+                options={["Casual", "Formal", "Sporty"]} 
+                placeholder="Select a style" 
             />
             <UploadBar file={file} setFile={setFile} />
         </div>
